@@ -46,7 +46,7 @@ public class BinaryControllerTest {
     }
 
     @Test
-    public void postParamter1() throws Exception {
+    public void postParamter1() throws Exception { // 0 + 0 = 0
         this.mvc.perform(post("/").param("operand1","0").param("operator","+").param("operand2","0"))//.andDo(print())
             .andExpect(status().isOk())
             .andExpect(view().name("result"))
@@ -57,7 +57,7 @@ public class BinaryControllerTest {
     }
 
     @Test
-    public void postParamter2() throws Exception {
+    public void postParamter2() throws Exception { // 001 (1) + 001 (1) = 10 (2 in decimal)
         this.mvc.perform(post("/").param("operand1","1").param("operator","+").param("operand2","1"))
             .andExpect(status().isOk())
             .andExpect(view().name("result"))
@@ -68,7 +68,7 @@ public class BinaryControllerTest {
     }
 
     @Test
-    public void postParamter3() throws Exception {
+    public void postParamter3() throws Exception { // 001 (1) + 001 (1) = 10 (2 in decimal)
         this.mvc.perform(post("/").param("operand1","001").param("operator","+").param("operand2","001"))
             .andExpect(status().isOk())
             .andExpect(view().name("result"))
@@ -84,7 +84,10 @@ public class BinaryControllerTest {
             .andExpect(status().isOk())
             .andExpect(view().name("result"))
             .andExpect(model().attribute("result", "110001"));
+    }
 
+    @Test
+    public void postMultiplication2() throws Exception {
         this.mvc.perform(post("/").param("operand1","0").param("operator","*").param("operand2","0"))
             .andExpect(status().isOk())
             .andExpect(view().name("result"))
@@ -97,7 +100,10 @@ public class BinaryControllerTest {
             .andExpect(status().isOk())
             .andExpect(view().name("result"))
             .andExpect(model().attribute("result", "10"));
+    }
 
+    @Test
+    public void postAnd2() throws Exception {
         this.mvc.perform(post("/").param("operand1","000").param("operator","&").param("operand2","000"))
             .andExpect(status().isOk())
             .andExpect(view().name("result"))
@@ -110,7 +116,10 @@ public class BinaryControllerTest {
             .andExpect(status().isOk())
             .andExpect(view().name("result"))
             .andExpect(model().attribute("result", "111"));
+    }
 
+    @Test
+    public void postOr2() throws Exception {
         this.mvc.perform(post("/").param("operand1","000").param("operator","|").param("operand2","000"))
             .andExpect(status().isOk())
             .andExpect(view().name("result"))

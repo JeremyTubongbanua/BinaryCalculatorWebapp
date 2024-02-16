@@ -67,6 +67,16 @@ public class BinaryAPIControllerTest {
     }
 
     @Test
+    public void add5() throws Exception {
+        this.mvc.perform(get("/add_json").param("operand1","100").param("operand2","000001"))
+            .andExpect(status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.operand1").value(100))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.operand2").value(1))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.result").value(101))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.operator").value("add"));
+    }
+
+    @Test
     public void multiply() throws Exception { // 111 (7) * 1010 (10) = 1000110 (70 in decimal)
         this.mvc.perform(get("/multiply").param("operand1","111").param("operand2","1010"))
             .andExpect(status().isOk())
